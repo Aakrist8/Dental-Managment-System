@@ -5,13 +5,16 @@ import java.awt.Color;
 import java.awt.Font;
 
 import net.proteanit.sql.DbUtils;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.sql.ResultSet;
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent; 
 
 
 public class view extends JFrame{
@@ -64,8 +67,25 @@ JTable table;
 
 
         JScrollPane jp = new JScrollPane(table);        //For scrolling when the data gets more
-        jp.setBounds(0, 100, 900, 600);
+        jp.setBounds(0, 100, 900, 450);
         add(jp);
+
+
+
+
+         JButton back = new JButton("Back");           //Approve btn for approving the given data if admin wants
+        back.setBounds(360, 570, 120, 30);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                setVisible(false);
+                new main_class();
+            }
+        });
+        
+        add(back);
+
+
 
         setSize(900,700);
         setLayout(null);

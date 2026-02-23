@@ -11,13 +11,16 @@ import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent; 
+import javax.swing.JOptionPane;
 
 import net.proteanit.sql.DbUtils;
 
 import java.sql.ResultSet;
 
 
-public class approve extends JFrame{
+public class approve extends JFrame implements ActionListener{
     
 
 JTable table;
@@ -50,14 +53,29 @@ JTable table;
 
 
         JButton approve = new JButton("Approve");           //Approve btn for approving the given data if admin wants
-        approve.setBounds(250, 570, 120, 30);
+        approve.setBounds(200, 570, 120, 30);
+        approve.addActionListener(this);
         add(approve);
 
 
 
         JButton reject = new JButton("Reject");           //Approve btn for approving the given data if admin wants
-        reject.setBounds(450, 570, 120, 30);
+        reject.setBounds(520, 570, 120, 30);
+        reject.addActionListener(this);
         add(reject);
+
+        
+        JButton back = new JButton("Back");           //Approve btn for approving the given data if admin wants
+        back.setBounds(360, 570, 120, 30);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                setVisible(false);
+                new main_class();
+            }
+        });
+        
+        add(back);
       
         setSize(900,700);
         setLayout(null);
@@ -65,7 +83,59 @@ JTable table;
         setVisible(true);
 
         }
-       
+
+
+        void loadTable() {
+        try {
+            conn c = new conn();
+            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM book WHERE status='pending'");
+            table.setModel(DbUtils.resultSetToTableModel(resultSet));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+        @Override
+        public void actionPerformed(ActionEvent e){         
+                
+               int row = table.getSelectedRow();
+                if (row == -1) {
+                     JOptionPane.showMessageDialog(null, "Please select an appointment to approve.");
+                     return;
+           
+                }
+           
+              try {
+        conn c = new conn();
+
+        
+        String id = table.getValueAt(row, 0).toString();        //Tyo row select garni ho 
+
+
+
+        if (e.getActionCommand().equals("Approve")) {
+            String query = "UPDATE book SET status='Approved' WHERE id='" + id + "'";
+            c.statement.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Appointment Approved");
+        } 
+         else if (e.getActionCommand().equals("Reject")) {
+            String query = "UPDATE book SET status='Rejected' WHERE id='" + id + "'";
+            c.statement.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Appointment Rejected");
+        }
+
+        
+        loadTable();            //yesle chai table load garcha after approval or rejection
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+        
+        
         public static void main(String[] args) {
             new approve();
         }

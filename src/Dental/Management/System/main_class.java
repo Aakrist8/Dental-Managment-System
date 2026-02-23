@@ -30,45 +30,47 @@ public class main_class extends JFrame{
         img.add(heading);
 
 
-        JButton approve = new JButton("Approve Appointment");           //Button to approve appointment
-        approve.setBounds(50, 200, 200, 50);
-        approve.setForeground(Color.white);
-        approve.setBackground(Color.black);
-        approve.setFocusPainted(false);
-        approve.addActionListener(new ActionListener() {
+        JButton manage = new JButton("Manage Appointment");           //Button to approve appointment
+        manage.setBounds(50, 200, 200, 50);
+        manage.setForeground(Color.white);
+        manage.setBackground(Color.black);
+        manage.setFocusPainted(false);
+        manage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-
+                setVisible(false);
+                new approve();
             }
         });
-        img.add(approve);
+        img.add(manage);
 
 
         JButton view = new JButton("View All Appointments");                //View all appointments
-        view.setBounds(50, 270, 200, 50);
+        view.setBounds(300, 200, 200, 50);
         view.setForeground(Color.white);
         view.setBackground(Color.black);
         view.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-
+                setVisible(false);
+                new view();
             }
         });
         img.add(view);
 
 
 
-        JButton pending = new JButton("View Pending Appointments");         //Only pending appointments
-        pending.setBounds(300, 270, 200, 50);
-        pending.setForeground(Color.white);
-        pending.setBackground(Color.black);
-           pending.addActionListener(new ActionListener() {
+        JButton doctor = new JButton("Manage Doctors");         //Doctor Management
+        doctor.setBounds(50, 270, 200, 50);
+        doctor.setForeground(Color.white);
+        doctor.setBackground(Color.black);
+           doctor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 
             }
         });
-        img.add(pending);
+        img.add(doctor);
 
 
 
@@ -86,7 +88,7 @@ public class main_class extends JFrame{
 
 
         JButton logout = new JButton("Logout");
-        logout.setBounds(50, 340, 200, 50);
+        logout.setBounds(300, 270, 200, 50);
         logout.setForeground(Color.white);
         logout.setBackground(Color.black);
            logout.addActionListener(new ActionListener() {
