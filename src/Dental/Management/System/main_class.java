@@ -67,28 +67,34 @@ public class main_class extends JFrame{
            doctor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                
+                new managedoctor();
+                setVisible(false);
             }
         });
         img.add(doctor);
 
 
 
-        JButton reject = new JButton("Reject Appointment");               //Approving the pending ones
-        reject.setBounds(300, 200, 200, 50);
-        reject.setForeground(Color.white);
-        reject.setBackground(Color.black);
-           reject.addActionListener(new ActionListener() {
+        
+
+
+          JButton inventory = new JButton("Inventory Management");               //Approving the pending ones
+        inventory.setBounds(300, 270, 200, 50);
+        inventory.setForeground(Color.white);
+        inventory.setBackground(Color.black);
+           inventory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                
+                new inventory();
+                setVisible(false);
             }
         });
-        img.add(reject);
+        img.add(inventory);
+
 
 
         JButton logout = new JButton("Logout");
-        logout.setBounds(300, 270, 200, 50);
+        logout.setBounds(50, 340, 200, 50);
         logout.setForeground(Color.white);
         logout.setBackground(Color.black);
            logout.addActionListener(new ActionListener() {

@@ -110,6 +110,7 @@ public class book extends JFrame implements ActionListener{
         back.setBounds(250,550,150,40);
         back.setBackground(Color.black);
         back.setForeground(Color.white);
+        back.addActionListener(this);
         add(back);
 
         setSize(1170, 650);      //Window Size
@@ -141,6 +142,10 @@ public class book extends JFrame implements ActionListener{
             } catch (Exception E) {
                 
             }
+        }
+        else if (e.getSource() == back){           //If back button clicked
+            setVisible(false);
+            new userdashboard();
         }
     }
     public static void main(String[] args) {

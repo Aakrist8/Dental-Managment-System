@@ -15,11 +15,12 @@ import javax.swing.JTable;
 import java.sql.ResultSet;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent; 
+import javax.swing.JOptionPane;
 
-
-public class view extends JFrame{
+public class view extends JFrame implements ActionListener{
     
 JTable table;
+JButton searchbtn, makebillBtn;
 
     Choice choiceSt;
 
@@ -72,6 +73,15 @@ JTable table;
 
 
 
+        searchbtn = new JButton("Search");
+        searchbtn.setBounds(20, 70, 80, 20);
+        add(searchbtn);
+        searchbtn.addActionListener(this);
+
+
+
+        
+
 
          JButton back = new JButton("Back");           //Approve btn for approving the given data if admin wants
         back.setBounds(360, 570, 120, 30);
@@ -92,6 +102,25 @@ JTable table;
         setLocation(300 ,100);
         setVisible(true);
     }
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == searchbtn){
+            String query = "SELECT * FROM book WHERE status = '"+ choiceSt.getSelectedItem()+"'";
+            try {
+                conn c = new conn();
+                ResultSet resultSet = c.statement.executeQuery(query);
+                table.setModel(DbUtils.resultSetToTableModel(resultSet));
+            } catch (Exception E) {
+                E.printStackTrace();
+            }
+        }
+
+      
+    }
+
     
     
     public static void main(String[] args) {

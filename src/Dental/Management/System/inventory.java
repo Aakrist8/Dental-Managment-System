@@ -23,17 +23,17 @@ import java.sql.ResultSet;
 
 
 
-public class managedoctor extends JFrame implements ActionListener{
+public class inventory extends JFrame implements ActionListener{
     JTable table;
     JButton add,update,delete,back;
 
-    managedoctor(){
+    inventory(){
         setLayout(null);
         getContentPane().setBackground(new Color(255,240,220));
 
 
 
-     JLabel heading = new JLabel("Doctor Data");             //Heading
+     JLabel heading = new JLabel("Inventory Data");             //Heading
      heading.setBounds(415, 20, 900, 50);
      heading.setFont(new Font("Raleway", Font.BOLD,25));
      heading.setForeground(Color.black);
@@ -81,7 +81,7 @@ public class managedoctor extends JFrame implements ActionListener{
     void loadTable() {
         try {
             conn c = new conn();
-            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM doctors");
+            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM inventory");
             table.setModel(DbUtils.resultSetToTableModel(resultSet));
         } catch (Exception E) {
             E.printStackTrace();
