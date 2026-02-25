@@ -22,7 +22,7 @@ public class conn {
                 
 
         } catch (Exception e) {
-            e.printStackTrace();                                    // TODO: handle exception
+            e.printStackTrace();                                   
         }
     }
 

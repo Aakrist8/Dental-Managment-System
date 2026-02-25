@@ -131,23 +131,30 @@ public class book extends JFrame implements ActionListener{
             String problem = tproblem.getText();
 
 
+            if(name.isEmpty() || age.isEmpty() || date.isEmpty() || address.isEmpty() || phone.isEmpty() || problem.isEmpty()){             //If any field is empty show message dialog to fill all fields
+                JOptionPane.showMessageDialog(null, "Please fill all fields before booking", "Error", JOptionPane.ERROR_MESSAGE);                   //If any field is empty show error message dialog to fill all fields
+                return;
+            }
+
             try {
                 conn c = new conn();
                 
-                String query = "INSERT INTO BOOK(name, age, date, address, phone, problem, status) VALUES('"+name+"', '"+age+"', '"+date+"', '"+address+"', '"+phone+"','"+problem+"', 'Pending')";
+                String query = "INSERT INTO BOOK(name, age, date, address, phone, problem, status) VALUES('"+name+"', '"+age+"', '"+date+"', '"+address+"', '"+phone+"','"+problem+"', 'Pending')";         //Query to insert booking details into database with status pending
                 c.statement.executeUpdate(query);       //Executing the query for inserting the data
-                JOptionPane.showMessageDialog(null, "Booked Successfully");
+                JOptionPane.showMessageDialog(null, "Booked Successfully");             //Message dialog to show booking success message
                 setVisible(false);
-                new userdashboard();
+                dispose();
+
             } catch (Exception E) {
-                
+                E.printStackTrace();
             }
         }
         else if (e.getSource() == back){           //If back button clicked
             setVisible(false);
-            new userdashboard();
+            dispose();
         }
     }
+    
     public static void main(String[] args) {
         new book();
     }

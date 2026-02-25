@@ -89,7 +89,7 @@ JButton searchbtn, makebillBtn;
             @Override
             public void actionPerformed(ActionEvent e){
                 setVisible(false);
-                new main_class();
+                dispose();
             }
         });
         

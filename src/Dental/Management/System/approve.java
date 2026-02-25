@@ -71,7 +71,7 @@ JTable table;
             @Override
             public void actionPerformed(ActionEvent e){
                 setVisible(false);
-                new main_class();
+                dispose();
             }
         });
         
@@ -85,10 +85,10 @@ JTable table;
         }
 
 
-        void loadTable() {
+        void loadTable() {                      //Method to load the table with pending appointments from the database
         try {
-            conn c = new conn();
-            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM book WHERE status='pending'");
+            conn c = new conn();                            //Database connection
+            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM book WHERE status='pending'");                            //Query to select pending appointments
             table.setModel(DbUtils.resultSetToTableModel(resultSet));
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,30 +101,30 @@ JTable table;
         @Override
         public void actionPerformed(ActionEvent e){         
                 
-               int row = table.getSelectedRow();
+               int row = table.getSelectedRow();                                                //Get the selected row from the table
                 if (row == -1) {
-                     JOptionPane.showMessageDialog(null, "Please select an appointment to approve.");
+                     JOptionPane.showMessageDialog(null, "Please select an appointment to approve.");                       //If no row is selected show message dialog to select an appointment
                      return;
            
                 }
            
               try {
-        conn c = new conn();
+        conn c = new conn();                                            //Database connection
 
         
         String id = table.getValueAt(row, 0).toString();        //Tyo row select garni ho 
 
 
 
-        if (e.getActionCommand().equals("Approve")) {
-            String query = "UPDATE book SET status='Approved' WHERE id='" + id + "'";
+        if (e.getActionCommand().equals("Approve")) {                                       //If approve button is clicked update the status of the selected appointment to approved in the database
+            String query = "UPDATE book SET status='Approved' WHERE id='" + id + "'";                   //Query to update the status of the selected appointment to approved
             c.statement.executeUpdate(query);
             JOptionPane.showMessageDialog(null, "Appointment Approved");
         } 
-         else if (e.getActionCommand().equals("Reject")) {
-            String query = "UPDATE book SET status='Rejected' WHERE id='" + id + "'";
+         else if (e.getActionCommand().equals("Reject")) {                                              //If reject button is clicked update the status of the selected appointment to rejected in the database
+            String query = "UPDATE book SET status='Rejected' WHERE id='" + id + "'";                   //Query to update the status of the selected appointment to rejected
             c.statement.executeUpdate(query);
-            JOptionPane.showMessageDialog(null, "Appointment Rejected");
+            JOptionPane.showMessageDialog(null, "Appointment Rejected");                        
         }
 
         

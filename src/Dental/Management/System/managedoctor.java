@@ -78,12 +78,12 @@ public class managedoctor extends JFrame implements ActionListener{
 
 
 
-    void loadTable() {
+    void loadTable() {                          //Method to load data from the database into the table
         try {
             conn c = new conn();
-            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM doctors");
+            ResultSet resultSet = c.statement.executeQuery("SELECT * FROM doctors");                        //Query to select all data from doctors table
             table.setModel(DbUtils.resultSetToTableModel(resultSet));
-        } catch (Exception E) {
+        } catch (Exception E) { 
             E.printStackTrace();
         }
     }
@@ -94,13 +94,13 @@ public class managedoctor extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == add) {
-            new adddoctor();
+            new adddoctor();                        //Open the add doctor frame when the add button is clicked
             setVisible(false);
         } else if (e.getSource() == update) {
               int row = table.getSelectedRow();
 
         if (row == -1) {
-            JOptionPane.showMessageDialog(null, "Please select a doctor to update");
+            JOptionPane.showMessageDialog(null, "Please select a doctor to update");                    //If no row is selected show message dialog to select a doctor
         } 
         else {
 
@@ -176,8 +176,9 @@ public class managedoctor extends JFrame implements ActionListener{
     }
 
     else if (e.getSource() == back) {
-        new main_class();
+        
         setVisible(false);
+        dispose();
     }
 }
     public static void main(String[] args) {
